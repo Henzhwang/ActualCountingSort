@@ -22,26 +22,30 @@ public class CountingSort {
     public static void main(String[] args) 
         {
             System.out.println("Before Sorting : ");
-            Random rn = new Random();
-            int elements = (int)(Math.random()*1000);
+            //Random rn = new Random();
+            //int elements = (int)(Math.random()*1000);
+            int elements = 1000000;
 //            int arr[]={1,4,7,3,4,5,6,3,4,8,6,4,4};
             int[] arr = new int[elements];
      
+            
+            for (int i = 0; i < arr.length; i++)
+            {  
+                //arr[i] = rn.nextInt();
+                arr[i] = (int)(Math.random()*1000000);
+                //System.out.println(arr[count] +" ");
+            }
             System.out.println(Arrays.toString(arr));
-//            for (int i = 0; i < arr.length; i++)
-//            {  
-//                arr[i] = rn.nextInt();
-//                //arr[i] = (int)(Math.random()*i);
-//                //System.out.println(arr[count] +" ");
-//            }
-//            
             arr=countingSort(arr);
             long start = System.nanoTime();
+            long starts = System.currentTimeMillis();
             System.out.println("=======================");
             System.out.println("After Sorting : ");
             System.out.println(Arrays.toString(arr));
             long end = System.nanoTime();
-            System.out.println("Time:" + (end - start));
+            long ends = System.currentTimeMillis();
+            System.out.println("Time:" + (end - start) +"ns");
+            System.out.println("Time:" + (ends - starts) +"ms");
         }
 
         static int[] countingSort(int arr[])
@@ -52,9 +56,11 @@ public class CountingSort {
             int result[] = new int[n];
 
             //Initialize count array with 9 as array contains elements from range 1 to 8.
-            int count[] = new int[9];
-            for (int i=0; i<9; ++i)
-            count[i] = 0;
+            int count[] = new int[1000000000];
+            for (int i=0; i<1000000000; ++i)
+            count[i] = 0;   
+            
+           
 
             //store count of each element in count array
             for (int i=0; i<n; ++i)
@@ -62,7 +68,7 @@ public class CountingSort {
 
             //Change count[i] so that count[i] now contains actual
             //position of this element in output array
-            for (int i=1; i<=8; ++i)
+            for (int i=1; i<=n-1; ++i)
             count[i] += count[i-1];
 
             for (int i = 0; i<n; ++i)
